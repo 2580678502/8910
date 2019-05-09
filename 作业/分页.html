@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #pagging li{display: inline-block;width: 30px;height: 30px;
+             border-radius: 10px;border: 1px black solid;
+             line-height: 30px;text-align: center;cursor: pointer}
+    </style>
+    <script>
+        var goods=[
+            [
+                {name:"第一页",price:"内容",type:'',src:"img/1.png"},
+                {name:"第1页",price:"其他内容",type:'',src:"img/2.png"}
+                ],
+            [
+                {name:"第二页",price:"内容",type:'',src:"img/3.png"},
+                {name:"第2页",price:"其他内容",type:'',src:"img/4.png"}
+            ],
+            [
+                {name:"第三页",price:"内容",type:'',src:"img/5.png"},
+                {name:"第3页",price:"其他内容",type:'',src:"img/6.png"}
+            ]
+        ]
+        console.log(goods[0][1].name)
+    </script>
+</head>
+<body>
+<ul id="pagging">
+    <li><</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>></li>
+</ul>
+<div id="content"></div>
+<script>
+    var pagging=document.getElementById("pagging");
+    var aLi=pagging.getElementsByTagName("li");
+    var index=1;//声明从第1个开始
+    aLi[index].style.background="red";
+    //当前页面的点击事件
+    for(var i=0;i<aLi.length;i++){
+         //先隐藏所有，再显示当前
+       aLi[i].onclick=function () {
+           index=this.innerHTML;
+           show()
+    }
+    }
+    //点击变成上一页
+    aLi[0].onclick=function () {
+        index--;//减少一个  也就是向前一个
+        show()
+    };
+    //点击变成下一页
+    aLi[4].onclick=function () {
+        index++;//增加一个  也就是向后一个
+        show()
+    };
+
+    function show() {
+        if(index>3){index=3}//如果index超过了3  那么让他停留在3
+        if(index<1){index=1}//如果index小于了1  那么让他停留在1
+        for (var j=0;j<aLi.length;j++){
+            //隐藏所有
+            aLi[j].style.background=""
+        }
+        //显示当前
+        aLi[index].style.background="red";
+        // console.log(goods[index-1])
+        var a=goods[index-1];
+        showContent(a)
+    }
+    //传递过来一组数据，根据数据显示到页面中
+    function showContent(arr) {
+        var str="";
+        for(var i=0;i<arr.length;i++){
+            str+='<div class="left"><img src="'+arr[i].src+'"><div><div class="right"></div>'
+        }
+        document.getElementById("content").innerHTML=str
+    }
+
+</script>
+</body>
+</html>

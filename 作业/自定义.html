@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{position: relative}
+        li{list-style: none;display: inline-block;width: 50px;border: 1px black solid;
+            height: 50px;background-color: #d7d7d7}
+        .subNav{width:500px;height: 200px;background-color: #999999;display: none;
+            position: absolute }
+        button{width: 50px;height: 50px;position: relative;left: 270px;top:-68px}
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul id="nav">
+        <li>第一页</li>
+        <li>第二页</li>
+        <li>第三页</li>
+        <li>第四页</li>
+    </ul>
+    <div class="subNav">这是第一页的内容</div>
+    <div class="subNav">这是第二页的内容</div>
+    <div class="subNav">这是第三页的内容</div>
+    <div class="subNav">这是第四页的内容</div>
+    <!--<button id="prev"><</button>-->
+    <!--<button id="next">></button>-->
+</div>
+<script>
+    var oNav=document.getElementById("nav");
+    var box = document.getElementById("box");
+    var aLi = oNav.getElementsByTagName("li");
+    var aDiv = box.getElementsByTagName("div");
+    var prev = document.getElementById("prev");
+    var next = document.getElementById("next");
+    console.log(aLi);
+    for(var i=0;i<aLi.length;i++){
+        aLi[i].style.background="white";
+        aLi[i].mark = i;
+        aLi[i].onclick = function (){
+            for(var j = 0; j<aLi.length; j++){
+                aDiv[j].style.display = "none"
+            }
+            aDiv[this.mark].style.display = "block";
+            console.log(aDiv)
+        };
+        // prev.onclick = function () {
+        //
+        // };
+        // next.onclick = function () {
+        //
+        // }
+    }
+
+</script>
+</body>
+</html>

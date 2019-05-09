@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{ padding: 0; margin: 0;}
+        li{ list-style: none}
+        #focus{ width: 400px; height: 280px; margin: 100px auto; position: relative}
+        #focus img{width: 400px; height: 280px; display: none}
+        #slidePaging{ position: absolute; top: -80px; left: 70px}
+        #slidePaging li{ width: 50px; height: 50px;margin-left: 10px;
+            background: gray; line-height: 50px; text-align: center;
+            display: inline-block; cursor: pointer}
+        #prev{width: 50px;height: 50px;position: absolute;top: -80px;
+            background-color: #d7d7d7;text-indent: 15px;line-height: 50px}
+        #next{width: 50px;height: 50px;position: absolute;top: -80px;right: 0;
+            background-color: #d7d7d7;text-indent: 15px;line-height: 50px}}
+    </style>
+
+</head>
+<body>
+<div id="focus">
+    <ul id="slideImg">
+        <li><img src="img/pic_01.png" alt=""></li>
+        <li><img src="img/pic_02.png" alt=""></li>
+        <li><img src="img/pic_03.png" alt=""></li>
+        <li><img src="img/pic_04.png" alt=""></li>
+    </ul>
+    <ul id="slidePaging">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <a href="#" class="control prev" id="prev"><</a>
+    <a href="#" class="control next" id="next">></a>
+</div>
+<script>
+    //分析：
+    // 1.自动轮播
+    // 2.浮动圆点，显示对应的
+    // 4.浮动停止，移开显示
+    // 5.上一页和下一页
+    //实现自动轮播：setInterval 定时器函数 叠加（图片的下标）
+    var oFocus = document.getElementById("focus");
+    var slidePaging = document.getElementById("slidePaging");
+    var prev = document.getElementById("prev");
+    var next = document.getElementById("next");
+    var slidePaging = document.getElementById("slidePaging");
+    var aImg = oFocus.getElementsByTagName("img");
+    var aPagging = slidePaging.getElementsByTagName("li");
+    var index = 0;
+    var timer = null;
+    //1.实现默认显示：第一张图片显示
+    aImg[index].style.display = "block";
+    aPagging[index].style.background = "red";
+    aPagging[index].style.color = "white";
+    //2.定时器函数 叠加 隐藏所有，显示当前
+    function slide() {
+        index++;
+        show()
+    }
+    timer = setInterval(slide,1000);
+    //3.浮动到容器上时，停止定时器
+    oFocus.onmouseover = function () {
+        clearInterval(timer)
+    };
+    oFocus.onmouseout = function () {
+        timer = setInterval(slide,1000)
+    };
+    //4.浮动到小圆点时，显示对应的图片
+    for(var i = 0; i<aPagging.length; i++){
+        aPagging[i].onmouseover = function () {
+            //this==>被浮动的元素
+            index = this.innerHTML-1;
+            show();
+        }
+    }
+    function show() {
+        if(index>aImg.length-1){
+            index=0;
+        }
+        if(index<0){
+            index=aImg.length-1;
+        }
+        for(var i = 0; i<aImg.length; i++){
+            aImg[i].style.display = "none";
+            aPagging[i].style.background ="";
+            aPagging[i].style.color ="";
+        }
+        aImg[index].style.display = "block";
+        aPagging[index].style.background = "red";
+        aPagging[index].style.color = "white"
+    }
+    //5.向前向后
+    prev.onclick = function (ev) {
+        index--;
+        show();
+    }
+    next.onclick = function (ev) {
+        index++;
+        show();
+    }
+</script>
+</body>
+</html>

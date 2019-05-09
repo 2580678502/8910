@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+选择省份:
+<select name="" id="sheng">
+    <option value="请选择省份">请选择省份</option>
+</select>
+选择城市:
+<select name="" id="shi">
+    <option value="请选择城市">请选择城市</option>
+</select>
+<script>
+    // 1.定义数据
+    var cities=new Array();
+    cities["湖北"]=["武汉","潜江","仙桃","黄冈"];
+    cities["江西"]=["九江","萍乡","南昌"];
+    cities["河南"]=["开封","郑州","焦作"];
+    // console.log(cities)
+    //2.根据数据显示省份 innerHTML
+    var shengStr='<option value="请选择省份">请选择省份</option>';
+    for (attr in cities){
+        shengStr+='<option value="'+attr+'">'+attr+'</option>'
+    }
+    console.log(shengStr);
+    var sheng=document.getElementById("sheng");
+    sheng.innerHTML=shengStr;
+    //3.获取选择的省份，根据省份得到城市数组，遍历城市数组，显示城市
+    sheng.onchange=function () {
+        var val=this.value;
+        var shis=cities[val];
+        var shi=document.getElementById("shi");
+        var shiStr='<option value="请选择城市">请选择城市</option>';
+        for (attr in shis){
+            shiStr+='<option value="'+shis[attr]+'">'+shis[attr]+'</option>'
+        }
+        shi.innerHTML=shiStr;
+    }
+</script>
+</body>
+</html>

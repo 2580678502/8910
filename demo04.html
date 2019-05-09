@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" method="get">
+    <p>
+        <label for="name">输入昵称：</label><input type="text" id="name">
+        <span id="nameInfo" class="info"></span>
+    </p>
+    <p>
+        <label for="email">输入邮箱：</label><input type="text" id="email">
+        <span id="emailError" class="error"></span></p>
+    <p>
+        <label for="pwd">输入密码：</label><input type="text" id="pwd">
+        <span id="pwdError" class="error"></span></p>
+    <p>
+        <label for="repwd">输入密码：</label><input type="text" id="repwd">
+        <span id="repwdError" class="error"></span></p>
+    <p>
+    <div id="btnContainer">
+        <input type="button" value="注册" id="btn">
+    </div>
+    </p>
+</form>
+<script>
+    //object：对象 四大内置对象
+    var aInput = document.getElementsByTagName("input");//数组
+    var nameInfo = document.getElementById("nameInfo")
+    var btn = document.getElementById("btn")
+    var btnContainer = document.getElementById("btnContainer")
+    aInput[0].onfocus = function(){
+        nameInfo.innerHTML = "此邮箱将是您登陆当当网的邮箱"
+    }
+    aInput[0].onblur = function () {
+        var name= this.value;
+        if(name==""){
+            nameInfo.innerHTML = "邮箱不能为空";
+            btnContainer.innerHTML = '<input type="button" value="注册" id="btn" disabled>'
+        }else{
+            nameInfo.innerHTML ="<img src='true.gif'>"
+            btnContainer.innerHTML = '<input type="button" value="注册" id="btn">'
+        }
+    }
+
+</script>
+</body>
+</html>

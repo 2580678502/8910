@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{ padding: 0; margin: 0;}
+        #box{ position: relative}
+        #nav li{ height: 30px; background: red; width: 200px; list-style: none}
+        .subNav{ width: 200px; height: 200px; background: #d7d7d7;
+            position: absolute; left: 200px; top:0px; display: none}
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul id="nav">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+
+    <div class="subNav">111111111</div>
+    <div class="subNav">222222222</div>
+    <div class="subNav">333333333</div>
+    <div class="subNav">444444444</div>
+    <div class="subNav">555555555</div>
+</div>
+<script>
+    var oNav = document.getElementById("nav")
+    var box = document.getElementById("box")
+    var aLi = oNav.getElementsByTagName("li")//一组数
+    var aDiv = box.getElementsByTagName("div")//一组数
+    for(var i = 0; i<aLi.length; i++){
+        //一级内容用i
+        aLi[i].mark = i;
+        aLi[i].onclick = function () {
+            //一组数控制另一组
+            //二级内容，不能不i
+            for(var j = 0; j<aLi.length; j++){
+                aDiv[j].style.display = "none"
+            }
+            aDiv[this.mark].style.display = "block"
+            console.log(aDiv)
+        }
+    }
+</script>
+</body>
+</html>
